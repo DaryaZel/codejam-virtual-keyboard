@@ -72,7 +72,6 @@
     ["key arrow", "ArrowDown", "▼", "▼", "▼", "▼"],
     ["key arrow", "ArrowRight", "►", "►", "►", "►"],
     ["key ctrl", "ControlRight", "Ctrl", "Ctrl", "Ctrl", "Ctrl"]]]
-    let counter = 0
     for (let i = 0; i < row.length; i++) {
         let divRow = document.createElement('div');
         divRow.className = "row";
@@ -134,15 +133,13 @@
                         elemsUp[i].classList.add("displayInherit")
                     }
                 }
-                else if (e.target.innerText === "Tab"
-                    || e.target.innerText === "Shift"
-                    || e.target.innerText === "Ctrl"
-                    || e.target.innerText === "Win"
-                    || e.target.innerText === "Alt"
-                    || e.target.innerText === "ENTER"
-                    || e.target.innerText === "DEL") {
-                }
-                else {
+                else if (e.target.innerText !== "Tab"
+                    && e.target.innerText !== "Shift"
+                    && e.target.innerText !== "Ctrl"
+                    && e.target.innerText !== "Win"
+                    && e.target.innerText !== "Alt"
+                    && e.target.innerText !== "ENTER"
+                    && e.target.innerText !== "DEL"){
                     textarea.value += e.target.innerText
                 }
             })
@@ -158,7 +155,7 @@
                         }
                         else {
                             localStorage.setItem('eng', 1)
-                        };
+                        }
                         for (let i = 0; i < elemsOn.length; i++) {
                             elemsOn[i].classList.toggle("displayNone")
                             elemsOff[i].classList.toggle("displayInherit")
