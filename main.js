@@ -146,7 +146,7 @@
                 if (e.code === divKey.firstChild.classList[0]) {
                     divKey.classList.add("active")
 
-                    if (e.ctrlKey && e.code === 'ShiftLeft') {
+                    if (e.ctrlKey && (e.code === 'ShiftLeft'||e.code === 'ShiftRight')) {
                         let elemsOff = document.getElementsByClassName('off');
                         let elemsOn = document.getElementsByClassName('on');
                         if (localStorage.eng == 1) {
@@ -166,7 +166,7 @@
                             elemsUp[i].classList.toggle("displayInherit")
                         }
                     }
-                    else if (e.code === 'ShiftLeft') {
+                    else if (e.code === 'ShiftLeft'||e.code === 'ShiftRight') {
                         for (let i = 0; i < elemsDown.length; i++) {
                             elemsDown[i].classList.add("displayNone")
                             elemsUp[i].classList.add("displayInherit")
@@ -198,7 +198,7 @@
             document.addEventListener('keyup', (e) => {
                 if (e.code === divKey.firstChild.classList[0]) {
                     divKey.classList.remove("active")
-                    if (e.code === 'ShiftLeft') {
+                    if (e.code === 'ShiftLeft'||e.code === 'ShiftRight') {
                         for (let i = 0; i < elemsDown.length; i++) {
                             elemsDown[i].classList.remove("displayNone")
                             elemsUp[i].classList.remove("displayInherit")
