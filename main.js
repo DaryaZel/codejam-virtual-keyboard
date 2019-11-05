@@ -3,6 +3,7 @@
     wrapper.className = "wrapper"
     let textarea = document.createElement('textarea')
     textarea.id = "textarea";
+    textarea.maxLength = 0;
     let keyboard = document.createElement('div')
     keyboard.className = "keyboard"
     document.body.appendChild(wrapper);
@@ -121,32 +122,30 @@
                 if (e.target.innerText === "Backspace") {
                     textarea.value = textarea.value.slice(0, -1)
                 }
-                else if (e.target.innerText === "CapsLock") {
+                else if (e.target.innerText === "CapsLock" || e.target.innerText === 'Shift') {
                     for (let i = 0; i < elemsDown.length; i++) {
                         elemsDown[i].classList.toggle("displayNone")
                         elemsUp[i].classList.toggle("displayInherit")
                     }
                 }
-                else if (e.target.innerText === 'ShiftLeft') {
-                    for (let i = 0; i < elemsDown.length; i++) {
-                        elemsDown[i].classList.add("displayNone")
-                        elemsUp[i].classList.add("displayInherit")
-                    }
-                }
                 else if (e.target.innerText !== "Tab"
-                    && e.target.innerText !== "Shift"
                     && e.target.innerText !== "Ctrl"
                     && e.target.innerText !== "Win"
                     && e.target.innerText !== "Alt"
                     && e.target.innerText !== "ENTER"
-                    && e.target.innerText !== "DEL"){
+                    && e.target.innerText !== "DEL"
+                    && e.target.innerText !== "") {
                     textarea.value += e.target.innerText
+                }
+                else if (e.target.innerText === "") {
+                    textarea.value += " "
                 }
             })
 
             document.addEventListener('keydown', (e) => {
                 if (e.code === divKey.firstChild.classList[0]) {
                     divKey.classList.add("active")
+
                     if (e.ctrlKey && e.code === 'ShiftLeft') {
                         let elemsOff = document.getElementsByClassName('off');
                         let elemsOn = document.getElementsByClassName('on');
@@ -171,6 +170,27 @@
                         for (let i = 0; i < elemsDown.length; i++) {
                             elemsDown[i].classList.add("displayNone")
                             elemsUp[i].classList.add("displayInherit")
+                        }
+                    }
+                    else if (divKey.innerText === "") {
+                        textarea.value += " "
+                    }
+                    else if (e.keyCode === 9) { e.preventDefault();
+                        e.stopPropagation(); }
+                    else if (divKey.innerText !== "Tab"
+                        && divKey.innerText !== "Shift"
+                        && divKey.innerText !== "Ctrl"
+                        && divKey.innerText !== "Win"
+                        && divKey.innerText !== "Alt"
+                        && divKey.innerText !== "ENTER"
+                        && divKey.innerText !== "DEL"
+                        && divKey.innerText !== ""
+                    ) {
+                        if (divKey.innerText === "Backspace" && document.activeElement.localName !== "textarea") {
+                            textarea.value = textarea.value.slice(0, -1)
+                        }
+                        else if (divKey.innerText !== "Backspace") {
+                            textarea.value += divKey.innerText
                         }
                     }
                 }
